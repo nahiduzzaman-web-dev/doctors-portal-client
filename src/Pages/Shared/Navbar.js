@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/icons/logo.png';
 
 const Navbar = () => {
     const menuItems = <>
@@ -11,7 +12,9 @@ const Navbar = () => {
         <li><Link to='/login'>Login</Link></li>
     </>
     return (
-        <div class="navbar bg-base-100">
+        <div class="navbar bg-neutral text-white fixed z-[100]"
+            style={{ boxShadow: 'rgba(0, 0, 0, 0.45) 0px 25px 20px -20px', }}
+        >
             <div class="navbar-start">
                 <div class="dropdown">
                     <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -21,7 +24,9 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <a class="btn btn-ghost normal-case text-xl">Doctors Portal</a>
+                <a class="btn btn-ghost normal-case text-xl">Doctors Portal
+                    <img src={logo} alt="" width='50px' className='ml-5' />
+                </a>
             </div>
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal p-0">

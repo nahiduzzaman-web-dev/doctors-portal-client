@@ -1,12 +1,12 @@
 import React from 'react';
-import contact from '../../assets/images/appointment.png'
+import contactImg from '../../assets/images/appointment.png'
 import PrimaryButton from '../Shared/PrimaryButton';
 
 const Contact = () => {
     return (
         <section
             style={{
-                background: `url(${contact})`
+                background: `url(${contactImg})`
             }}
             className="mb-10"
         >

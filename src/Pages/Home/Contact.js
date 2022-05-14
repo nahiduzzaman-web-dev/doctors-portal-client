@@ -18,9 +18,9 @@ const Contact = () => {
 
                 <div className='mx-auto mb-15'>
                     <div className='flex flex-col justify-center items-center'>
-                        <input type="email" placeholder="Email Address" class="input input-bordered input-accent w-full max-w-xs" />
-                        <input type="text" placeholder="Subject" class="input input-bordered input-accent w-full max-w-xs my-3" />
-                        <textarea class="textarea textarea-accent w-full max-w-xs mb-5" placeholder="Your Message"></textarea>
+                        <input type="email" placeholder="Email Address" className="input input-bordered input-accent w-full max-w-xs" />
+                        <input type="text" placeholder="Subject" className="input input-bordered input-accent w-full max-w-xs my-3" />
+                        <textarea className="textarea textarea-accent w-full max-w-xs mb-5" placeholder="Your Message"></textarea>
                         <PrimaryButton>Submit</PrimaryButton>
                     </div>
 

@@ -4,7 +4,11 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { sendEmailVerification } from 'firebase/auth';
+import toastify from 'toastify-js';
+import "toastify-js/src/toastify.css";
+import useToken from '../hooks/useToken';
 
 const SignUp = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -14,20 +18,28 @@ const SignUp = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+    const [token] = useToken(user || gUser);
+
     const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
 
     const onSubmit = async data => {
-        console.log(data);
         await createUserWithEmailAndPassword(data.email, data.password);
+
         await updateProfile({ displayName: data.name });
-        navigate('/appointment');
+
+        await sendEmailVerification();
+
         if (data) {
             reset();
         }
+
+        reset();
     }
 
     if (loading || gLoading || updating) {
@@ -40,8 +52,9 @@ const SignUp = () => {
             <small>{error?.message || gError?.message || updateError?.message}</small>
         </p>
     }
-    if (user || gUser) {
-        console.log(user || gUser);
+    if (token) {
+        // navigate(from, { replace: true });
+        navigate('/appointment');
     }
 
     return (

@@ -8,7 +8,7 @@ const Banner = () => {
             style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', }}
             className="hero min-h-screen px-12" >
             <div className="hero-content flex-col lg:flex-row-reverse" >
-                <img src={chair} className="max-w-sm rounded-lg shadow-2xl" />
+                <img src={chair} className="max-w-sm rounded-lg shadow-2xl" alt='' />
                 <div>
                     <div className='pr-20'>
                         <h1 className="text-5xl font-bold">Your New Smile Starts Here</h1>

@@ -2,18 +2,70 @@ import React from 'react';
 import { format } from 'date-fns';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import Toastify from 'toastify-js';
+import "toastify-js/src/toastify.css";
 
-const BookingModal = ({ treatment, date, setTreatment }) => {
-    const { name, slots } = treatment;
+const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
+    const { _id, name, slots } = treatment;
     const [user, loading] = useAuthState(auth);
+    const formattedDate = format(date, 'PP');
     console.log(user);
 
     const handleBooking = e => {
         e.preventDefault();
         const slot = e.target.slot.value;
+        const booking = {
+            treatmentId: _id,
+            treatment: name,
+            date: formattedDate,
+            slot,
+            patientName: user.displayName,
+            patient: user.email,
+            phone: e.target.phone.value,
+
+        }
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                if (data.success) {
+                    Toastify({
+                        text: `Appointment is set, ${formattedDate} at ${slot}`,
+                        className: "info",
+                        gravity: "top",
+                        position: "center",
+                        style: {
+                            background: "linear-gradient(to right, #02AABD, #00CDAC)",
+                            fontWeight: 'bold',
+                            letterSpacing: '0.1em'
+                        }
+                    }).showToast();
+                }
+                else {
+                    Toastify({
+                        text: `Already have an appointment on ${data.booking?.date} at ${data.booking?.slot}`,
+                        className: "info",
+                        gravity: "top",
+                        position: "center",
+                        style: {
+                            background: "linear-gradient(to right, #FF0800, #FF0800)",
+                            fontWeight: 'bold',
+                            letterSpacing: '0.1em'
+                        }
+                    }).showToast();
+                }
+                refetch();
+                setTreatment(null);
+            })
 
 
-        setTreatment(null);
+
     }
 
     return (

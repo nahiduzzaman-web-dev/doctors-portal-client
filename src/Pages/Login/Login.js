@@ -7,6 +7,7 @@ import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css";
+import useToken from '../hooks/useToken';
 
 const Login = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -19,6 +20,8 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    const [token] = useToken(user || gUser);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -64,10 +67,10 @@ const Login = () => {
     }
 
     useEffect(() => {
-        if (user || gUser) {
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [user, gUser, from, navigate]);
+    }, [token, from, navigate]);
 
     if (loading || gLoading || sending) {
         return <Loading></Loading>

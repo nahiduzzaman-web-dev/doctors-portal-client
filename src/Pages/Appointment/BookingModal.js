@@ -9,7 +9,6 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
     const { _id, name, slots } = treatment;
     const [user, loading] = useAuthState(auth);
     const formattedDate = format(date, 'PP');
-    console.log(user);
 
     const handleBooking = e => {
         e.preventDefault();
@@ -24,7 +23,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
             phone: e.target.phone.value,
 
         }
-        fetch('http://localhost:5000/booking', {
+        fetch('https://nameless-shelf-94689.herokuapp.com/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

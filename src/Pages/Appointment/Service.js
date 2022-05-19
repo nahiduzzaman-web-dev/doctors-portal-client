@@ -2,7 +2,6 @@ import React from 'react';
 
 const Service = ({ service, setTreatment }) => {
     const { name, slots } = service;
-    console.log(slots);
     return (
         <div
             style={{ boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}

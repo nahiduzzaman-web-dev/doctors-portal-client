@@ -2,7 +2,9 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import About from './Pages/About/About';
 import Appointment from './Pages/Appointment/Appointment';
+import AddDoctor from './Pages/DashBoard/AddDoctor';
 import DashBoard from './Pages/DashBoard/DashBoard';
+import ManageDoctor from './Pages/DashBoard/ManageDoctor';
 import MyAppointments from './Pages/DashBoard/MyAppointments';
 import MyReviews from './Pages/DashBoard/MyReviews';
 import Users from './Pages/DashBoard/Users';
@@ -36,6 +38,16 @@ function App() {
           <Route path='users' element={
             <RequireAdmin>
               <Users></Users>
+            </RequireAdmin>
+          }></Route>
+          <Route path='addDoctor' element={
+            <RequireAdmin>
+              <AddDoctor></AddDoctor>
+            </RequireAdmin>
+          }></Route>
+          <Route path='manageDoctor' element={
+            <RequireAdmin>
+              <ManageDoctor></ManageDoctor>
             </RequireAdmin>
           }></Route>
         </Route>

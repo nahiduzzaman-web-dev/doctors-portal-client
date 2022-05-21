@@ -7,6 +7,7 @@ import DashBoard from './Pages/DashBoard/DashBoard';
 import ManageDoctor from './Pages/DashBoard/ManageDoctor';
 import MyAppointments from './Pages/DashBoard/MyAppointments';
 import MyReviews from './Pages/DashBoard/MyReviews';
+import Payment from './Pages/DashBoard/Payment';
 import Users from './Pages/DashBoard/Users';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
@@ -35,6 +36,7 @@ function App() {
         }>
           <Route index element={<MyAppointments></MyAppointments>}></Route>
           <Route path='review' element={<MyReviews></MyReviews>}></Route>
+          <Route path='payment/:id' element={<Payment></Payment>}></Route>
           <Route path='users' element={
             <RequireAdmin>
               <Users></Users>

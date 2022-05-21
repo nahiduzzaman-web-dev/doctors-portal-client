@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Service = ({ service, setTreatment }) => {
-    const { name, slots } = service;
+    const { name, slots, price } = service;
     return (
         <div
             style={{ boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}
@@ -16,6 +16,7 @@ const Service = ({ service, setTreatment }) => {
                     }
                 </p>
                 <p>{slots?.length} {slots?.length > 1 ? 'spaces' : 'space'} Available</p>
+                <p><span className='text-red-500'>$</span> <span className='font-bold'>{price}</span></p>
                 <div className="card-actions">
                     <label
                         onClick={() => setTreatment(service)}

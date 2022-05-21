@@ -6,7 +6,7 @@ import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css";
 
 const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
-    const { _id, name, slots } = treatment;
+    const { _id, name, slots, price } = treatment;
     const [user, loading] = useAuthState(auth);
     const formattedDate = format(date, 'PP');
 
@@ -18,12 +18,13 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
             treatment: name,
             date: formattedDate,
             slot,
+            price,
             patientName: user.displayName,
             patient: user.email,
             phone: e.target.phone.value,
 
         }
-        fetch('https://nameless-shelf-94689.herokuapp.com/booking', {
+        fetch('http://localhost:5000/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
